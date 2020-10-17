@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card-content>
+    <ion-img src="assets/icon/logo2.jpeg"></ion-img>
+  </ion-card-content>
+
+  <form [formGroup]="form" (ngSubmit)="login()">
+
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email"  formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password"  formControlName="password"></ion-input>
+    </ion-item>
+    <p style="margin-top: 20px; float: right; margin-right: 20px;">Forgot Password?</p>
+    <div style="margin-top: 80px; margin-left: 85px;">
+      <ion-button shape="round" type="submit">Login</ion-button>
+      <ion-button shape="round" routerLink="/register" color="danger">Register</ion-button>
+    </div>
+  </form>
+</ion-content>

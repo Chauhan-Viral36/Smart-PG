@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+   </ion-buttons>
+    <ion-title>My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="updateData()">
+    <ion-item style="margin-top: 10px;">
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input type="text" formControlName="fName"></ion-input>
+    </ion-item>
+
+    <!-- <ion-text color="danger">
+      <p [hidden]="form.valid || submitted == false" class="ion-padding-start">
+        First Name is required
+      </p>
+    </ion-text> -->
+
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">Middle Name</ion-label>
+      <ion-input type="text" formControlName="mName"></ion-input>
+    </ion-item>
+  
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input type="text" formControlName="lName"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">Address</ion-label>
+      <ion-input type="text" formControlName="adrs"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">Pincode</ion-label>
+      <ion-input type="number"  formControlName="pin"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">City</ion-label>
+      <ion-input type="text" formControlName="city"></ion-input>
+    </ion-item>
+
+    <ion-list style="margin-top: 10px;">
+      <ion-radio-group formControlName="gender">
+        <ion-list-header>
+          <ion-label>
+            Gender
+          </ion-label>
+        </ion-list-header>
+          <ion-item style="margin-top: 10px;">
+            <ion-label>Male</ion-label>
+            <ion-radio value="male"></ion-radio>
+          </ion-item>
+          <ion-item style="margin-top: 10px;">
+            <ion-label>Female</ion-label>
+            <ion-radio value="female"></ion-radio>
+          </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">Date-Of-Birth</ion-label>
+      <ion-datetime displayFormat="YYYY/MM/DD" formControlName="dob"></ion-datetime>
+    </ion-item>
+  
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email"  formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 10px;">
+      <ion-label position="floating">Contact</ion-label>
+      <ion-input type="number"  formControlName="contact"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" shape="round" style="margin-top: 20px;" expand="full">Update</ion-button>
+  </form>
+</ion-content>

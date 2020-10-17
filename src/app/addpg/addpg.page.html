@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+   </ion-buttons>
+    <ion-title mode="ios">ADD PG</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+    <ion-item style="margin-top: 20px;">
+      <ion-label position="floating">PG Name</ion-label>
+      <ion-input type="text" formControlName="pgName"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 20px;">
+      <ion-label position="floating">PG Price</ion-label>
+      <ion-input type="number" formControlName="pgPrice"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 20px;">
+      <ion-label position="floating">PG Deposite</ion-label>
+      <ion-input type="number" formControlName="pgDeposite"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 20px;">
+      <ion-label position="floating">PG Address</ion-label>
+      <ion-input type="text" formControlName="pgAddress"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 20px;">
+      <ion-label position="floating">Area</ion-label>
+      <ion-input type="text" formControlName="pgArea"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-top: 25px;">
+      <ion-label>Amenities</ion-label>
+      <ion-select formControlName="pgAmenities">
+        <ion-select-option value="cooking">Cooking</ion-select-option>
+        <ion-select-option value="laundry">Laundry</ion-select-option>
+        <ion-select-option value="ac">Ac</ion-select-option>
+        <ion-select-option value="geyser">Geyser</ion-select-option>
+        <ion-select-option value="tv">Tv</ion-select-option>
+        <ion-select-option value="wifi">Wifi</ion-select-option>
+        <ion-select-option value="lift">Lift</ion-select-option>
+        <ion-select-option value="cctv">CCTV</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item style="margin-top: 20px;">
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea type="text" formControlName="pgDescription"></ion-textarea>
+    </ion-item>
+
+    <ion-item style="margin-top: 20px;" *ngFor="let photo of photoService.photos">
+      <ion-label position="floating" style="margin-top: 20px;">PG Images</ion-label>
+      <ion-img [src]="photo.webviewPath"  style="margin-top: 20px;"></ion-img>
+    </ion-item>
+
+    <ion-button style="margin-top: 20px;" (click)="imageUpload()">Take Photo</ion-button>
+  
+    <ion-button size="medium" shape="round" style="margin-top: 20px;" expand="full" (click)="addDetails()">Add</ion-button>
+  </form>
+</ion-content>

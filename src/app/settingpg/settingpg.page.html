@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+   </ion-buttons>
+    <ion-title>Setting</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment style="margin-top: 5px;" [(ngModel)]="selectedTabs">
+    <ion-segment-button value="mypg">
+      <ion-label>My PG</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="bookpg">
+      <ion-label>Book PG</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="selectedTabs == 'mypg' ">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+        <ion-card-title>My PG</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        Keep close to Nature's heart... and break clear away, once in awhile,
+        and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      </ion-card-content>
+    </ion-card>  
+  </div>
+
+  <div *ngIf="selectedTabs == 'bookpg' ">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+        <ion-card-title>Book PG</ion-card-title>
+      </ion-card-header>
+  
+      <ion-card-content>
+        Keep close to Nature's heart... and break clear away, once in awhile,
+        and climb a mountain or spend a week in the woods. Wash your spirit clean.
+      </ion-card-content>
+    </ion-card>  
+  </div>
+
+</ion-content>

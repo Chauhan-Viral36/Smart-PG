@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Home</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment style="margin-top: 5px;" [(ngModel)]="selectedTabs">
+    <ion-segment-button value="all">
+      <ion-icon name="layers-outline"></ion-icon>
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="amenities" (click)="showAmenities()">
+      <ion-icon name="bed-outline"></ion-icon>
+      <ion-label>Amenities</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="area">
+      <ion-icon name="compass-outline"></ion-icon>
+      <ion-label>Area</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="price" (click)="showPrice()">
+      <ion-icon name="cash-outline"></ion-icon>
+      <ion-label>Price</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="selectedTabs == 'all' ">
+    <ion-list>
+      <ion-item *ngFor="let data of dataList">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+          </ion-card-header>
+
+          <ion-img src="https://picsum.photos/500/500"></ion-img>
+      
+          <ion-card-content>
+            Price={{data.pg_price}}
+            Deposite={{data.deposite}}
+          </ion-card-content>
+        </ion-card> 
+      </ion-item>
+    </ion-list> 
+  </div>
+
+  <div *ngIf="selectedTabs == 'amenities' ">
+    <ion-list>
+      <ion-item *ngFor="let data of dataAmenities">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+          </ion-card-header>
+          <ion-img src="https://picsum.photos/500/500"></ion-img>
+          <ion-card-content>
+            Price={{data.pg_price}}
+            Deposite={{data.deposite}}
+          </ion-card-content>
+        </ion-card>  
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="selectedTabs == 'area' ">
+    <form [formGroup]="form">
+      <ion-item style="margin-top: 20px;">
+        <ion-label position="floating">
+          <ion-icon name="search"></ion-icon> Search Area</ion-label>
+        <ion-input type="text" formControlName="pgArea"></ion-input>
+      </ion-item>
+      <ion-button size="medium" shape="round" style="margin-top: 20px;" expand="full" (click)="getArea()">Search</ion-button>
+    </form>
+    <ion-list>
+      <ion-item *ngFor="let data of dataArea">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+          </ion-card-header>
+          <ion-img src="https://picsum.photos/500/500"></ion-img>
+          <ion-card-content>
+            Price={{data.pg_price}}
+            Deposite={{data.deposite}}
+          </ion-card-content>
+        </ion-card>  
+      </ion-item>
+    </ion-list>  
+  </div>
+
+  <div *ngIf="selectedTabs == 'price' ">
+    <ion-list>
+      <ion-item *ngFor="let data of dataPrice">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+          </ion-card-header>
+          <ion-img src="https://picsum.photos/500/500"></ion-img>
+          <ion-card-content>
+            Price={{data.pg_price}}
+            Deposite={{data.deposite}}
+          </ion-card-content>
+        </ion-card>  
+      </ion-item>
+    </ion-list>  
+  </div>
+
+</ion-content>
