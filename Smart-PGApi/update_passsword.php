@@ -17,21 +17,24 @@ $data =(object) json_decode($input, true);
 $message = array();
    global $data;
 
+$email = $data->email;
+$password = $data->password;
 
-$status=$data->status;
-$id=$data->id;
-
-$query = "UPDATE `add_pg_detail` SET `status`= 'UnAvailable' where id= '$id'";
+ $query = "UPDATE `registration` SET `password`='$password' WHERE `email` = '$email'";
 
 $result = mysqli_query($con, $query);
 if ($result) {
    $message['status'] = "Success"; 
 }
-    else{
-    $message['status'] = "Error";
-    }
-
+elseif ($result == '') 
+{
+	 $message['status'] = "Blank VALUES";
+}
+else
+{
+    $message['status'] = "Error";   
+}
+   
 echo  json_encode($message);
 mysqli_close($con);
-
 ?>

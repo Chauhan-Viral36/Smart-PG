@@ -1,21 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 
 @Component({
-  selector: 'app-addpg',
-  templateUrl: './addpg.page.html',
-  styleUrls: ['./addpg.page.scss'],
+  selector: 'app-updatepgdetails',
+  templateUrl: './updatepgdetails.page.html',
+  styleUrls: ['./updatepgdetails.page.scss'],
 })
-export class AddpgPage implements OnInit {
+export class UpdatepgdetailsPage implements OnInit {
 
-  form: FormGroup;
+  form : FormGroup;
   img: PhotoService["photos"];
-  // imageElement:any;
-  // photos: any;
 
   constructor(
     public toastController: ToastController,
@@ -36,7 +34,6 @@ export class AddpgPage implements OnInit {
   }
 
   ngOnInit() {
-    //await this.photoService.loadSaved();
   }
 
   async showToast(message: string){
@@ -47,29 +44,11 @@ export class AddpgPage implements OnInit {
     toast.present(); 
   }
 
-  // async takePicture() {
-  //   const { Camera } = Plugins;
-  //   const image = await Camera.getPhoto({
-  //     quality: 90,
-  //     allowEditing: true,
-  //     resultType: CameraResultType.Uri
-  //   });
-  //   // image.webPath will contain a path that can be set as an image src.
-  //   // You can access the original file using image.path, which can be
-  //   // passed to the Filesystem API to read the raw data of the image,
-  //   // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-  //   var imageUrl = image.webPath;
-  //   // Can be set to the src of an image now
-  //   this.imageElement = imageUrl;
-  // }
-
   imageUpload(){
     this.photoService.addNewToGallery();
   }
 
-  
-
-  addDetails(){
+  updateDetails(){
 
     let details={
       pg_name: this.form.value.pgName,
@@ -84,10 +63,10 @@ export class AddpgPage implements OnInit {
     }
     if(this.form.valid) 
     {
-      this.http.post("http://localhost/Smart-PGApi/add_pg_detail.php",details).subscribe(res=>{
+      this.http.post("http://localhost/Smart-PGApi/update_pg_detail.php",details).subscribe(res=>{
         console.log(res.status);     
         if(res.status === "Success"){
-          this.showToast("Your PG Details Add successfully"); 
+          this.showToast("Your PG Details Updated successfully"); 
           this.router.navigateByUrl('/home');
         }
         else{

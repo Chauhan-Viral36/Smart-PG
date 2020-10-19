@@ -51,9 +51,12 @@ export class LoginPage implements OnInit {
     }
     if(this.form.valid) 
     {
-      this.http.post("http://localhost/Smart-PGApi/login.php",data).subscribe(res => {
+      this.http.post("http://localhost/Smart-PGApi/login_controller.php",data).subscribe(res => {
         if(res.result === "Login Success"){
           console.log(res.result);
+          console.log(res.message);
+          localStorage.setItem('name',res.message);
+          localStorage.setItem('id',res.id);
           this.showToast(res.result); 
           this.router.navigateByUrl('/home');
         }

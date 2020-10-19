@@ -5,29 +5,28 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-feedback',
-  templateUrl: './feedback.page.html',
-  styleUrls: ['./feedback.page.scss'],
+  selector: 'app-forgotpassword',
+  templateUrl: './forgotpassword.page.html',
+  styleUrls: ['./forgotpassword.page.scss'],
 })
-export class FeedbackPage implements OnInit {
+export class ForgotpasswordPage implements OnInit {
 
   form:FormGroup;
-  user_id:any;
 
   constructor(
     public toastController: ToastController,
     private formBuilder: FormBuilder,
     public http: HttpClient,
     public router: Router,
-  ) {
+  ) { 
     this.form = this.formBuilder.group({
-      // email: new FormControl('', Validators.compose([
-      //   Validators.required,
-      //   Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      // ])),
-      description: ['', Validators.required]
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      forgotpassword: ['', Validators.required]
     });
-   }
+  }
 
   ngOnInit() {
   }
@@ -44,18 +43,17 @@ export class FeedbackPage implements OnInit {
 
     let data = {
       
-      //email:this.form.value.email,
-      description:this.form.value.description,
-      user_id : localStorage.getItem('id')
+      email:this.form.value.email,
+      password:this.form.value.forgotpassword,
     }
     if(this.form.valid) 
     {
-      this.http.post("http://localhost/Smart-PGApi/feedback.php",data).subscribe(res => {
+      this.http.post("http://localhost/Smart-PGApi/update_passsword.php",data).subscribe(res => {
         if(res.status === "Success"){
           console.log(data)
           console.log(res.status);
-          this.showToast(res.status); 
-          this.router.navigateByUrl('/home');
+          this.showToast("Your Password Is Updated"); 
+          this.router.navigateByUrl('/login');
         }
         else{
           console.log(res.status);
@@ -65,8 +63,9 @@ export class FeedbackPage implements OnInit {
     } 
     else 
     {
-      this.showToast("Please Enter Feedback");
+      this.showToast("Please Valid Email or Password");
     }
+
   }
 
 }

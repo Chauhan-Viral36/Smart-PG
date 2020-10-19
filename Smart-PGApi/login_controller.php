@@ -33,7 +33,8 @@ if ($result > 0) {
 
       if ($data) {
                    // $result = json_encode(array('success' => true, 'result' => $datauser));
-          $result = json_encode(array('success' => true, 'result' => 'Login Success'));
+			 $result = json_encode(array('success' => true, 'result' => 'Login Success','message'=>$datauser['f_name'] . $datauser['l_name'] , 'id' => $datauser['user_id']));	   
+         // $result = json_encode(array('success' => true, 'result' => 'Login Success' , 'message' => $datauser['f_name']));
                 }  
 }
 else {

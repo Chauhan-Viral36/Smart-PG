@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -21,6 +22,7 @@ export class HomePage {
   constructor(
     public toastController: ToastController,
     public http: HttpClient,
+    public router: Router,
     public alertCtrl: AlertController,
     private formBuilder: FormBuilder,
     ) {
@@ -157,10 +159,25 @@ export class HomePage {
     });  
     await alert.present(); 
   }
+  // showData(){
+  //   this.itemId()
+  //   this.router.navigateByUrl('/pgdetails');
+  // }
   getData(){
 
     this.http.get("http://localhost/Smart-PGApi/show_pg_detail.php").subscribe(res =>{
       this.dataList=res;
+      //console.log(res)
+    })
+  }
+
+  itemId(){
+
+    this.router.navigateByUrl('/pgdetails');
+    this.http.get("http://localhost/Smart-PGApi/getitemid.php").subscribe(res =>{
+      //console.log(res)
+      localStorage.setItem('item-id',res.id);
+      //console.log(res.id);
     })
   }
 

@@ -73,12 +73,13 @@ export class MyprofilePage implements OnInit {
       gender:this.form.value.gender,
       email:this.form.value.email,
       contact_no:this.form.value.contact,
+      user_id:localStorage.getItem('id'),
     }
     //this.submitted=true
     if(this.form.valid) 
     {
-      this.http.post("http://localhost/Smart-PGApi/",data).subscribe(res=>{
-        console.log(res.status);     
+      this.http.post("http://localhost/Smart-PGApi/update_profile.php",data).subscribe(res=>{
+        console.log(res.status);
         if(res.status === "Success"){
           this.showToast("Data Updated successfully"); 
           this.router.navigateByUrl('/home');

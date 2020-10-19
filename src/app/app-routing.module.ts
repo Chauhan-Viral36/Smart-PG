@@ -43,6 +43,18 @@ const routes: Routes = [
     path: 'settingpg',
     loadChildren: () => import('./settingpg/settingpg.module').then( m => m.SettingpgPageModule)
   },
+  {
+    path: 'forgotpassword',
+    loadChildren: () => import('./forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
+  },
+  {
+    path: 'pgdetails',
+    loadChildren: () => import('./pgdetails/pgdetails.module').then( m => m.PgdetailsPageModule)
+  },
+  {
+    path: 'updatepgdetails',
+    loadChildren: () => import('./updatepgdetails/updatepgdetails.module').then( m => m.UpdatepgdetailsPageModule)
+  },
 ];
 
 @NgModule({

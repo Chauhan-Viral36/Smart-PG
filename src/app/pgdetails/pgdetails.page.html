@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>pgdetails</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item *ngFor="let data of dataList">
+    <ion-card>
+      <ion-card-header>
+        <ion-img src="https://picsum.photos/500/500"></ion-img>  
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+      </ion-card-content>
+      <ion-card-content>
+        Price={{data.pg_price}}
+      </ion-card-content>
+      <ion-card-content>
+        Deposite={{data.deposite}}
+      </ion-card-content>
+      <ion-card-content>
+        Amenities={{data.pg_amenities}}
+      </ion-card-content>
+      <ion-card-content>
+        Address={{data.pg_address}}
+      </ion-card-content>
+      <ion-card-content>
+        Area={{data.pg_area}}
+      </ion-card-content>
+      <ion-card-content>
+        Description={{data.pg_description}}
+      </ion-card-content>
+      <ion-card-content>
+        OwnerName={{data.f_name + ' ' + data.l_name}}
+      </ion-card-content>
+    </ion-card> 
+  </ion-item>
+
+  <ion-button size="medium" shape="round" style="margin-top: 20px;" expand="full" (click)="showAlert()">Book</ion-button>
+
+</ion-content>
