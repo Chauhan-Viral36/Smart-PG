@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CameraResultType, Plugins } from '@capacitor/core';
 import { ToastController } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 
@@ -14,8 +15,7 @@ export class AddpgPage implements OnInit {
 
   form: FormGroup;
   img: PhotoService["photos"];
-  // imageElement:any;
-  // photos: any;
+  imageElement:any;
 
   constructor(
     public toastController: ToastController,
@@ -47,25 +47,25 @@ export class AddpgPage implements OnInit {
     toast.present(); 
   }
 
-  // async takePicture() {
-  //   const { Camera } = Plugins;
-  //   const image = await Camera.getPhoto({
-  //     quality: 90,
-  //     allowEditing: true,
-  //     resultType: CameraResultType.Uri
-  //   });
-  //   // image.webPath will contain a path that can be set as an image src.
-  //   // You can access the original file using image.path, which can be
-  //   // passed to the Filesystem API to read the raw data of the image,
-  //   // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-  //   var imageUrl = image.webPath;
-  //   // Can be set to the src of an image now
-  //   this.imageElement = imageUrl;
-  // }
-
-  imageUpload(){
-    this.photoService.addNewToGallery();
+  async takePicture() {
+    const { Camera } = Plugins;
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri
+    });
+    // image.webPath will contain a path that can be set as an image src.
+    // You can access the original file using image.path, which can be
+    // passed to the Filesystem API to read the raw data of the image,
+    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+    var imageUrl = image.webPath;
+    // Can be set to the src of an image now
+    this.imageElement = imageUrl;
   }
+
+  // imageUpload(){
+  //   this.photoService.addNewToGallery();
+  // }
 
   
 
@@ -79,12 +79,14 @@ export class AddpgPage implements OnInit {
       pg_area: this.form.value.pgArea,
       deposite: this.form.value.pgDeposite,
       pg_description: this.form.value.pgDescription,
-      user_id : localStorage.getItem('id')
-      // get upload image value 
+      user_id : localStorage.getItem('id'),
+      images : this.imageElement
     }
+    console.log(details)
     if(this.form.valid) 
     {
-      this.http.post("http://localhost/Smart-PGApi/add_pg_detail.php",details).subscribe(res=>{
+      this.http.post("http://localhost/Smart-PGApi/add_pg.php",details).subscribe(res=>{
+        console.log(res)
         console.log(res.status);     
         if(res.status === "Success"){
           this.showToast("Your PG Details Add successfully"); 

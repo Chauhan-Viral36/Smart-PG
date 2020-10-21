@@ -15,12 +15,15 @@
     <ion-segment-button value="bookpg" (click)="getBookpg()">
       <ion-label>Book PG</ion-label>
     </ion-segment-button>
+    <ion-segment-button value="notificacions" (click)="notigication()">
+      <ion-label>Notificacions</ion-label>
+    </ion-segment-button>
   </ion-segment>
 
   <div *ngIf="selectedTabs == 'mypg' ">
     <ion-list>
       <ion-item *ngFor="let data of dataMypg">
-        <ion-card>
+        <ion-card (click)="getDetail(data.id)">
           <ion-card-header>
             <ion-card-title>Name={{data.pg_name}}</ion-card-title>
           </ion-card-header>
@@ -44,6 +47,20 @@
           <ion-card-content>
             Price={{data.pg_price}}
             Deposite={{data.deposite}}
+          </ion-card-content>
+        </ion-card>  
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="selectedTabs == 'notificacions' ">
+    <ion-list>
+      <ion-item *ngFor="let data of dataNotificacions">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Notification</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{data.f_name + ' ' + data.l_name + ' '}}Has Book Your PG.
           </ion-card-content>
         </ion-card>  
       </ion-item>

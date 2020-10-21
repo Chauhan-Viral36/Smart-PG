@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 
@@ -14,11 +14,13 @@ export class UpdatepgdetailsPage implements OnInit {
 
   form : FormGroup;
   img: PhotoService["photos"];
+  id:any;
 
   constructor(
     public toastController: ToastController,
     private formBuilder: FormBuilder,
     public router: Router,
+    private route: ActivatedRoute,
     public photoService: PhotoService,
     public http: HttpClient,
   ) { 
@@ -34,6 +36,14 @@ export class UpdatepgdetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getIteamid()
+  }
+
+  getIteamid(){
+
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
   }
 
   async showToast(message: string){
@@ -58,7 +68,7 @@ export class UpdatepgdetailsPage implements OnInit {
       pg_area: this.form.value.pgArea,
       deposite: this.form.value.pgDeposite,
       pg_description: this.form.value.pgDescription,
-      user_id : localStorage.getItem('id')
+      id : this.id
       // get upload image value 
     }
     if(this.form.valid) 

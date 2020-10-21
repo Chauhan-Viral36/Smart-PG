@@ -48,12 +48,16 @@ const routes: Routes = [
     loadChildren: () => import('./forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
   },
   {
-    path: 'pgdetails',
+    path: 'pgdetails/:id',
     loadChildren: () => import('./pgdetails/pgdetails.module').then( m => m.PgdetailsPageModule)
   },
   {
-    path: 'updatepgdetails',
+    path: 'updatepgdetails/:id',
     loadChildren: () => import('./updatepgdetails/updatepgdetails.module').then( m => m.UpdatepgdetailsPageModule)
+  },
+  {
+    path: 'showpgupdate/:id',
+    loadChildren: () => import('./showpgupdate/showpgupdate.module').then( m => m.ShowpgupdatePageModule)
   },
 ];
 

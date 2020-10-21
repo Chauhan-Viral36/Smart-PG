@@ -53,12 +53,12 @@
       <ion-textarea type="text" formControlName="pgDescription"></ion-textarea>
     </ion-item>
 
-    <ion-item style="margin-top: 20px;" *ngFor="let photo of photoService.photos">
+    <ion-item style="margin-top: 20px;">
       <ion-label position="floating" style="margin-top: 20px;">PG Images</ion-label>
-      <ion-img [src]="photo.webviewPath"  style="margin-top: 20px;"></ion-img>
+      <ion-img src="{{imageElement}}"  style="margin-top: 20px;"></ion-img>
     </ion-item>
 
-    <ion-button style="margin-top: 20px;" (click)="imageUpload()">Take Photo</ion-button>
+    <ion-button style="margin-top: 20px;" (click)="takePicture()">Take Photo</ion-button>
   
     <ion-button size="medium" shape="round" style="margin-top: 20px;" expand="full" (click)="addDetails()">Add</ion-button>
   </form>

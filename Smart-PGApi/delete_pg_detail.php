@@ -9,30 +9,21 @@
             header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
         exit(0);
     }
-    
 include 'connection.php';
-
-$input = file_get_contents('php://input'); 
-$data =(object) json_decode($input, true); 
+header('Content-Type: application/json');
+$postjson = json_decode(file_get_contents('php://input'), true);
 $message = array();
-   global $data;
+$id=$data->id; 
 
-
-$status=$data->status;
-$book_user_id=$data->book_user_id;
-$id=$data->id;
-
-$query = "UPDATE `add_pg_detail` SET `status`= 'UnAvailable' , `book_user_id`='$book_user_id' where id = '$id'";
-
+$query = "DELETE FROM  `add_pg_detail` WHERE id='$postjson[id]'";
 $result = mysqli_query($con, $query);
-if ($result) {
-   $message['status'] = "Success"; 
+
+if ($result == 0) {
+    $message['status'] = "Error"; 
 }
     else{
-    $message['status'] = "Error";
+    $message['status'] = "Success";
     }
-
-echo  json_encode($message);
-mysqli_close($con);
-
+	echo  json_encode($message);
+mysqli_close($con); 
 ?>

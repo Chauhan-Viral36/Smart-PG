@@ -33,7 +33,6 @@ export class HomePage {
 
   ngOnInit() {
     this.getData()
-    //this.getAmenities()
   }
 
   async showToast(message: string){
@@ -159,26 +158,16 @@ export class HomePage {
     });  
     await alert.present(); 
   }
-  // showData(){
-  //   this.itemId()
-  //   this.router.navigateByUrl('/pgdetails');
-  // }
+  
   getData(){
 
     this.http.get("http://localhost/Smart-PGApi/show_pg_detail.php").subscribe(res =>{
       this.dataList=res;
-      //console.log(res)
     })
   }
 
-  itemId(){
-
-    this.router.navigateByUrl('/pgdetails');
-    this.http.get("http://localhost/Smart-PGApi/getitemid.php").subscribe(res =>{
-      //console.log(res)
-      localStorage.setItem('item-id',res.id);
-      //console.log(res.id);
-    })
+  getDetail(pid:any){
+    this.router.navigateByUrl('/pgdetails/'+pid);
   }
 
   getAmenities(){

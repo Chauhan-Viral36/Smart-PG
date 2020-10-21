@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-pgdetails',
-  templateUrl: './pgdetails.page.html',
-  styleUrls: ['./pgdetails.page.scss'],
+  selector: 'app-showpgupdate',
+  templateUrl: './showpgupdate.page.html',
+  styleUrls: ['./showpgupdate.page.scss'],
 })
-export class PgdetailsPage implements OnInit {
+export class ShowpgupdatePage implements OnInit {
 
   dataList:any;
 
@@ -18,8 +18,9 @@ export class PgdetailsPage implements OnInit {
     public http: HttpClient,
     public alertCtrl: AlertController,
     private route: ActivatedRoute,
+    public router: Router,
     public toastController: ToastController,
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.getIteamid()
@@ -30,8 +31,12 @@ export class PgdetailsPage implements OnInit {
 
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      console.log(params['id']);
     });
+  }
+
+  getDetail(pid:any){
+    this.showAlertUpdate()
+    this.router.navigateByUrl('/updatepgdetails/'+pid);
   }
 
   async showToast(message: string){
@@ -42,21 +47,44 @@ export class PgdetailsPage implements OnInit {
     toast.present(); 
   }
 
-  async showAlert() {  
+  async showAlertUpdate() {  
     const alert = await this.alertCtrl.create({  
       header: 'Confirmation',  
-      message: 'Are You Sure You Want To Book This PG.......',  
+      message: 'Are You Sure You Want To Update This PG?',  
       buttons: [  
         {  
           text: 'Cancel',  
           handler: data => {  
-            console.log('Cancel clicked');  
+            this.router.navigateByUrl('/home');
           }  
         },  
         {  
           text: 'Ok',  
           handler: data => {  
-            this.book(); 
+            
+          }  
+        }  
+      ]  
+    });  
+    await alert.present();  
+    const result = await alert.onDidDismiss();
+  }  
+
+  async showAlertDelete() {  
+    const alert = await this.alertCtrl.create({  
+      header: 'Confirmation',  
+      message: 'Are You Sure You Want To Delete This PG?',  
+      buttons: [  
+        {  
+          text: 'Cancel',  
+          handler: data => {  
+            this.router.navigateByUrl('/home');
+          }  
+        },  
+        {  
+          text: 'Ok',  
+          handler: data => {  
+            this.deletePg()
           }  
         }  
       ]  
@@ -75,22 +103,21 @@ export class PgdetailsPage implements OnInit {
     })
   }
 
-  book(){
+  deletePg(){
 
-    //this.showToast("Your PG Is Booked......");
     let data = {
-      id:this.id,
-      book_user_id : localStorage.getItem('id')
+      id : this.id
     }
     console.log(data)
-    this.http.post("http://localhost/Smart-PGApi/book_pg.php",data).subscribe(res =>{
-      console.log(res.status)
+    this.http.post("http://localhost/Smart-PGApi/delete_pg_detail.php",data).subscribe(res =>{
       if(res.status==="Success"){
-        this.showToast("Your PG Is Booked......");
+        this.showToast("Your PG Is Deleted SuccessFully")
+        this.router.navigateByUrl('/home');
       }
       else{
-        this.showToast("Something Went Wrong......");
+        console.log(res)
       }
     })
   }
+
 }

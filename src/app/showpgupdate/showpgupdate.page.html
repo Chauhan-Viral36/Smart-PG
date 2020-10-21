@@ -1,18 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>pgdetails</ion-title>
+    <ion-title>showpgupdate</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngFor="let data of dataList">
 
-  <ion-item *ngFor="let data of dataList">
+  <ion-item>
     <ion-card>
       <ion-card-header>
         <ion-img src="https://picsum.photos/500/500"></ion-img>  
       </ion-card-header>
       <ion-card-content>
-        <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+        <ion-card-title>PG-Name : {{data.pg_name}}</ion-card-title>
       </ion-card-content>
       <ion-card-content>
         Price={{data.pg_price}}
@@ -35,12 +35,10 @@
       <ion-card-content>
         Status={{data.status}}
       </ion-card-content>
-      <ion-card-content>
-        OwnerName={{data.f_name + ' ' + data.l_name}}
-      </ion-card-content>
-    </ion-card> 
+    </ion-card>
   </ion-item>
-
-  <ion-button size="medium" shape="round" style="margin-top: 20px;" expand="full" (click)="showAlert()">Book</ion-button>
-
+  <div style="margin-top: 30px; margin-left: 85px;">
+    <ion-button shape="round" type="submit" (click)="getDetail(data.id)">Update</ion-button>
+    <ion-button shape="round" type="submit" color="danger" (click)="showAlertDelete()">Delete</ion-button>
+  </div>
 </ion-content>
