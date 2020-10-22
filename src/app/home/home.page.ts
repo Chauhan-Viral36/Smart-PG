@@ -32,7 +32,7 @@ export class HomePage {
     }
 
   ngOnInit() {
-    this.getData()
+    this.getData(null)
   }
 
   async showToast(message: string){
@@ -159,10 +159,13 @@ export class HomePage {
     await alert.present(); 
   }
   
-  getData(){
+  getData(event){
 
     this.http.get("http://localhost/Smart-PGApi/show_pg_detail.php").subscribe(res =>{
       this.dataList=res;
+
+      if (event)
+          event.target.complete();
     })
   }
 

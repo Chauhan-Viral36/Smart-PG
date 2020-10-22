@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-segment style="margin-top: 5px;" [(ngModel)]="selectedTabs">
     <ion-segment-button value="all">
       <ion-icon name="layers-outline"></ion-icon>
@@ -32,10 +35,10 @@
       <ion-item *ngFor="let data of dataList">
         <ion-card (click)="getDetail(data.id)">
           <ion-card-header>
-            <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+            <ion-card-title>Name : {{data.pg_name}}</ion-card-title>
           </ion-card-header>
 
-          <ion-img src="https://picsum.photos/500/500"></ion-img>
+          <ion-img src="{{data.images}}"></ion-img>
       
           <ion-card-content>
             Price={{data.pg_price}}
@@ -51,9 +54,9 @@
       <ion-item *ngFor="let data of dataAmenities">
         <ion-card (click)="getDetail(data.id)">
           <ion-card-header>
-            <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+            <ion-card-title>Name : {{data.pg_name}}</ion-card-title>
           </ion-card-header>
-          <ion-img src="https://picsum.photos/500/500"></ion-img>
+          <ion-img src="{{data.images}}"></ion-img>
           <ion-card-content>
             Price={{data.pg_price}}
             Deposite={{data.deposite}}
@@ -76,9 +79,9 @@
       <ion-item *ngFor="let data of dataArea">
         <ion-card (click)="getDetail(data.id)">
           <ion-card-header>
-            <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+            <ion-card-title>Name : {{data.pg_name}}</ion-card-title>
           </ion-card-header>
-          <ion-img src="https://picsum.photos/500/500"></ion-img>
+          <ion-img src="{{data.images}}"></ion-img>
           <ion-card-content>
             Price={{data.pg_price}}
             Deposite={{data.deposite}}
@@ -93,9 +96,9 @@
       <ion-item *ngFor="let data of dataPrice">
         <ion-card (click)="getDetail(data.id)">
           <ion-card-header>
-            <ion-card-title>Name={{data.pg_name}}</ion-card-title>
+            <ion-card-title>Name : {{data.pg_name}}</ion-card-title>
           </ion-card-header>
-          <ion-img src="https://picsum.photos/500/500"></ion-img>
+          <ion-img src="{{data.images}}"></ion-img>
           <ion-card-content>
             Price={{data.pg_price}}
             Deposite={{data.deposite}}

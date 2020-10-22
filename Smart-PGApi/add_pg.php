@@ -55,7 +55,7 @@ $images = $data->images;
         file_put_contents($file, $image_base64);
 
 
- $query = "INSERT INTO `add_pg_detail`(`pg_name`, `pg_price`, `pg_amenities`, `pg_address`, `pg_area` , `deposite`,`pg_description`,`user_id`, `images`) VALUES ('$pg_name','$pg_price','$pg_amenities','$pg_address', '$pg_area' ,'$deposite','$pg_description','$user_id','$images')";
+ $query = "INSERT INTO `add_pg_detail`(`pg_name`, `pg_price`, `pg_amenities`, `pg_address`, `pg_area` , `deposite`,`pg_description`,`user_id`, `images`) VALUES ('$pg_name','$pg_price','$pg_amenities','$pg_address', '$pg_area' ,'$deposite','$pg_description','$user_id','http://localhost/Smart-PGApi/$file')";
 
 $result = mysqli_query($con, $query);
 if ($result) {
@@ -69,7 +69,6 @@ elseif ($result === '') {
     }
 
 echo  json_encode($message);
-echo $query;
 mysqli_close($con);
 
 ?>

@@ -5,14 +5,24 @@
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
+    <ion-content *ngFor="let data of dataImage">
+      <ion-refresher slot="fixed" (ionRefresh)="getImage($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
       <ion-card>
         <ion-card-header>
           <ion-card-title>Hello {{userName}}</ion-card-title>
         </ion-card-header>
       
-        <ion-card-content>
-          <ion-img src="https://picsum.photos/200/300"></ion-img>
+        <ion-card-content >
+          <ion-avatar class="image">
+            <ion-img src="{{data.profile_photo}}"></ion-img>
+          </ion-avatar>
+          <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button (click)="takePicture()">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
         </ion-card-content>
       
       </ion-card>

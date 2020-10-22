@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CameraResultType, Plugins } from '@capacitor/core';
 import { ToastController } from '@ionic/angular';
-import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-addpg',
@@ -14,14 +13,12 @@ import { PhotoService } from '../services/photo.service';
 export class AddpgPage implements OnInit {
 
   form: FormGroup;
-  img: PhotoService["photos"];
   imageElement:any;
 
   constructor(
     public toastController: ToastController,
     private formBuilder: FormBuilder,
     public router: Router,
-    public photoService: PhotoService,
     public http: HttpClient,
   ) { 
     this.form = this.formBuilder.group({
@@ -52,23 +49,17 @@ export class AddpgPage implements OnInit {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: true,
-      resultType: CameraResultType.Uri
+      resultType: CameraResultType.Base64
     });
     // image.webPath will contain a path that can be set as an image src.
     // You can access the original file using image.path, which can be
     // passed to the Filesystem API to read the raw data of the image,
     // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-    var imageUrl = image.webPath;
+    var imageUrl = image.base64String;
     // Can be set to the src of an image now
-    this.imageElement = imageUrl;
+    this.imageElement = "data:image/jpeg;base64,"+imageUrl;
   }
-
-  // imageUpload(){
-  //   this.photoService.addNewToGallery();
-  // }
-
   
-
   addDetails(){
 
     let details={

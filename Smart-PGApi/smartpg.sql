@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2020 at 10:36 PM
+-- Generation Time: Oct 22, 2020 at 11:26 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -48,14 +48,8 @@ CREATE TABLE `add_pg_detail` (
 --
 
 INSERT INTO `add_pg_detail` (`id`, `pg_name`, `pg_price`, `pg_amenities`, `pg_address`, `pg_area`, `deposite`, `pg_description`, `status`, `user_id`, `book_user_id`, `images`) VALUES
-(8, 'Maruti', 4000, 'geyser', 'Ahmedabad', 'Maninagar', '12000', 'Nice Accomodation', 'UnAvailable', 3, 0, 'http://localhost/smart-pgapi/Upload_image/5f8fdd3424e752020-10-21-09-03-16.jpg'),
-(9, 'nn', 3655, 'tv', 'kjhjkdf', 'kmkrg', '10000', 'jgkjkegjkg', 'UnAvailable', 3, 0, 'http://localhost/smart-pgapi/Upload_image/5f901156641ed2020-10-21-12-45-42.jpg'),
-(10, 'kljfgkletgl', 5200, 'geyser', ',mgkgrkg', ';lkgkr', '15000', 'lkjgklgjkelgk', 'Available', 3, 0, 'http://localhost/smart-pgapi/Upload_image/5f9011d4797542020-10-21-12-47-48.jpg'),
-(11, 'klgkljkgrl', 3525, 'wifi', 'rjgnergnegl', 'lrgklrlg', '36522', ',mmgklerjkgemek', 'UnAvailable', 2, 0, 'http://localhost/smart-pgapi/Upload_image/5f9012bd5079a2020-10-21-12-51-41.jpg'),
-(12, 'klgkljkgrl', 3525, 'wifi', 'rjgnergnegl', 'lrgklrlg', '36522', ',mmgklerjkgemek', 'Available', 3, 0, 'http://localhost/smart-pgapi/Upload_image/blob:http://localhost:8100/f883c3e0-4284-48b7-bd04-b972767e3b9b'),
-(13, 'klgkljkgrl', 3525, 'wifi', 'rjgnergnegl', 'lrgklrlg', '36522', ',mmgklerjkgemek', 'UnAvailable', 2, 3, 'blob:http://localhost:8100/f883c3e0-4284-48b7-bd04-b972767e3b9b'),
-(14, 'klgkljkgrl', 3525, 'wifi', 'rjgnergnegl', 'lrgklrlg', '36522', ',mmgklerjkgemek', 'UnAvailable', 3, 2, 'blob:http://localhost:8100/f883c3e0-4284-48b7-bd04-b972767e3b9b'),
-(15, 'klgkljkgrl', 3525, 'wifi', 'rjgnergnegl', 'lrgklrlg', '36522', ',mmgklerjkgemek', 'Available', 3, 0, 'blob:http://localhost:8100/f883c3e0-4284-48b7-bd04-b972767e3b9b');
+(1, 'Maruti', 3500, 'laundry', 'Ahmedabad', 'Maninagar', '10000', 'Nice', 'UnAvailable', 2, 3, 'http://localhost/Smart-PGApi/Upload_image/5f91bd495e0c0.png'),
+(2, 'Rock', 6000, 'cooking', 'Ahmedabad', 'Satelite', '20000', 'Nice Food', 'Available', 2, 0, 'http://localhost/Smart-PGApi/Upload_image/5f91bf1daa79c.png');
 
 -- --------------------------------------------------------
 
@@ -115,7 +109,7 @@ CREATE TABLE `registration` (
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `contact_no` text COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `profile_photo` blob NOT NULL
+  `profile_photo` varchar(500) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -125,7 +119,8 @@ CREATE TABLE `registration` (
 INSERT INTO `registration` (`user_id`, `f_name`, `m_name`, `l_name`, `address`, `pincode`, `city`, `dob`, `gender`, `email`, `contact_no`, `password`, `profile_photo`) VALUES
 (1, 'admin', 'admin', 'admin', 'admin', 1234, 'ahmedabad', '1997-11-11', '', 'admin@gmail.com', '123456789', 'admin@123', ''),
 (2, 'Ami', 'G', 'Soni', 'Ahmedabd', 380013, 'Ahmedabad', '1997-11-14', 'female', 'ami@gmail.com', '7894561320', 'ami@1411', ''),
-(3, 'Reenal', 'Babulal', 'Patel', 'Nikol', 352625, 'Ahmedabad', '2020-10-18', 'female', 'reenal@gmail.com', '7325659852', 'reenal@123', '');
+(3, 'Reenal', 'Babulal', 'Patel', 'Nikol', 352625, 'Ahmedabad', '2020-10-18', 'female', 'reenal@gmail.com', '7325659852', 'reenal@123', ''),
+(4, 'Viral', 'P', 'Chauhan', 'Hathijan', 382445, 'Ahmedabad', '1999-08-07', 'male', 'chauhanviral36@gmail.com', '7359880957', 'viral@7899', 'http://localhost/Smart-PGApi/Upload_profile/5f91dca886213.png');
 
 --
 -- Indexes for dumped tables
@@ -163,7 +158,7 @@ ALTER TABLE `registration`
 -- AUTO_INCREMENT for table `add_pg_detail`
 --
 ALTER TABLE `add_pg_detail`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `amenities`
@@ -181,7 +176,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

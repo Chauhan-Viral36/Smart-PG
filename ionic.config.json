@@ -1,5 +1,8 @@
 {
   "name": "Smart-PG",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }

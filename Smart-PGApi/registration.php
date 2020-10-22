@@ -36,9 +36,8 @@ $gender = $data->gender;
 $email = $data->email;
 $contact_no = $data->contact_no;
 $password = $data->password;
-$profile_photo = $data->profile_photo;
 
- $query = "INSERT INTO `registration`(`f_name`, `m_name`, `l_name`, `address`, `pincode`, `city`, `dob`, `gender`, `email`, `contact_no`, `password`,`profile_photo`) VALUES ('$f_name','$m_name','$l_name','$address','$pincode','$city','$dob','$gender','$email','$contact_no','$password',$profile_photo)";
+ $query = "INSERT INTO `registration`(`f_name`, `m_name`, `l_name`, `address`, `pincode`, `city`, `dob`, `gender`, `email`, `contact_no`, `password`) VALUES ('$f_name','$m_name','$l_name','$address','$pincode','$city','$dob','$gender','$email','$contact_no','$password')";
 // $query = "INSERT INTO `registration`(`f_name`, `m_name`, `l_name`, `address`, `pincode`, `city`, `dob`, `gender`, `email`, `contact_no`, `password`) "
 //        . "VALUES ('ami','g','soni','ahmedabad','123456','ahd','1212/12/12','f','ami@g.com','789456130','ami')";
 
