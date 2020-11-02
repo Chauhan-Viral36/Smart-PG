@@ -45,7 +45,7 @@ export class PgdetailsPage implements OnInit {
   async showAlert() {  
     const alert = await this.alertCtrl.create({  
       header: 'Confirmation',  
-      message: 'Are You Sure You Want To Book This PG.......',  
+      message: 'Are You Sure You Want To Book This PG?',  
       buttons: [  
         {  
           text: 'Cancel',  

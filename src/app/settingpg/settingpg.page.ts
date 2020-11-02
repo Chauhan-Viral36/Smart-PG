@@ -18,6 +18,7 @@ export class SettingpgPage implements OnInit {
 
   ngOnInit() {
     this.getMypg()
+    this.getNotificationData()
   }
 
   getDetail(pid:any){
@@ -43,9 +44,19 @@ export class SettingpgPage implements OnInit {
       //console.log(res)
     })
   }
+  getNotificationData(){
+    let data={
+      book_user_id : localStorage.getItem('id')
+    }
+    this.http.post("http://localhost/Smart-PGApi/getnotificationdetails.php",data).subscribe(res =>{
+      localStorage.setItem('userid',res[0].user_id);
+      console.log(res[0].user_id)
+    })
+  }
   notigication(){
 
     let data={
+      user_id : localStorage.getItem('userid'),
       book_user_id : localStorage.getItem('id')
     }
     console.log(data)

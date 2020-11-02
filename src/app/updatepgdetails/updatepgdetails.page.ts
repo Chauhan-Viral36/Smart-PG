@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CameraResultType, Plugins } from '@capacitor/core';
 import { ToastController } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 
@@ -13,8 +14,9 @@ import { PhotoService } from '../services/photo.service';
 export class UpdatepgdetailsPage implements OnInit {
 
   form : FormGroup;
-  img: PhotoService["photos"];
+  imageElement:any;
   id:any;
+  submitted = false;
 
   constructor(
     public toastController: ToastController,
@@ -54,8 +56,20 @@ export class UpdatepgdetailsPage implements OnInit {
     toast.present(); 
   }
 
-  imageUpload(){
-    this.photoService.addNewToGallery();
+  async takePicture() {
+    const { Camera } = Plugins;
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Base64
+    });
+    // image.webPath will contain a path that can be set as an image src.
+    // You can access the original file using image.path, which can be
+    // passed to the Filesystem API to read the raw data of the image,
+    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+    var imageUrl = image.base64String;
+    // Can be set to the src of an image now
+    this.imageElement = "data:image/jpeg;base64,"+imageUrl;
   }
 
   updateDetails(){
@@ -68,10 +82,15 @@ export class UpdatepgdetailsPage implements OnInit {
       pg_area: this.form.value.pgArea,
       deposite: this.form.value.pgDeposite,
       pg_description: this.form.value.pgDescription,
-      id : this.id
-      // get upload image value 
+      id : this.id,
+      images : this.imageElement
     }
-    if(this.form.valid) 
+    this.submitted=true
+    if(this.form.invalid) 
+    {
+      this.showToast("Please Enter Valid Data."); 
+    } 
+    else 
     {
       this.http.post("http://localhost/Smart-PGApi/update_pg_detail.php",details).subscribe(res=>{
         console.log(res.status);     
@@ -83,10 +102,6 @@ export class UpdatepgdetailsPage implements OnInit {
           this.showToast("Something went wrong"); 
         }
       })
-    } 
-    else 
-    {
-      this.showToast("Please Enter Valid Data.");
     } 
   }
 }

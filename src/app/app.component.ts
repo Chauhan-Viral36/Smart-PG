@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   userName:any;
-  imageElement:any = "assets/icon/profile.webp"
+  imageElement:any;
   dataImage:any;
   constructor(
     private platform: Platform,

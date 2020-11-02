@@ -12,152 +12,51 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
 export class RegisterPage implements OnInit {
 
   form:FormGroup;
-  //submitted = false;
-
-  // errormessages : {
-  //   fName: [
-  //     {
-  //       type: 'required',
-  //       message: 'First Name is required.'
-  //     },
-  //     {
-  //       type: 'pattern',
-  //       message: 'Only Character Allows In First Name.'
-  //     },
-  //   ],
-
-  //   mName: [
-  //     {
-  //       type: 'required',
-  //       message: 'Middle Name is required.'
-  //     },
-  //     {
-  //       type: 'pattern',
-  //       message: 'Only Character Allows In Middle Name.'
-  //     },
-  //   ],
-
-  //   lName: [
-  //     {
-  //     type: 'required',
-  //     message: 'Last Name is required.'
-  //     },
-  //     {
-  //       type: 'pattern',
-  //       message: 'Only Character Allows In Last Name.'
-  //     },
-  //   ],
-
-  //   adrs: [{
-  //     type: 'required',
-  //     message: 'Address is required.'
-  //   }],
-
-  //   pin: [
-  //     {
-  //     type: 'required',
-  //     message: 'Pin is required.'
-  //     },
-  //     {
-  //       type: 'minLength',
-  //       message: 'Enter Valid Pin.'
-  //     },
-  //     {
-  //       type: 'maxLength',
-  //       message: 'Enter Valid Pin.'
-  //     },
-  //   ],
-
-  //   city: [{
-  //     type: 'required',
-  //     message: 'City is required.'
-  //   }],
-
-  //   gender: [{
-  //     type: 'required',
-  //     message: 'Select Gender.'
-  //   }],
-
-  //   dob: [{
-  //     type: 'required',
-  //     message: 'Select Date Of Birth.'
-  //   }],
-
-  //   email: [
-  //     {
-  //     type: 'required',
-  //     message: 'Email is required.'
-  //     },
-  //     {
-  //       type: 'pattern',
-  //       message: 'Enter Valid Email.'
-  //     },
-  //   ],
-
-  //   contact: [
-  //     {
-  //     type: 'required',
-  //     message: 'Contact is required.'
-  //     },
-  //     {
-  //       type: 'minLength',
-  //       message: 'Enter Valid Contact Number.'
-  //     },
-  //     {
-  //       type: 'maxLength',
-  //       message: 'Enter Valid Contact Number.'
-  //     },
-  //   ],
-
-  //   password: [{
-  //     type: 'required',
-  //     message: 'Password is required.'
-  //     }],
-  // }
-
+  submitted = false;
+  
   constructor(
     public toastController: ToastController,
     private formBuilder: FormBuilder,
     public router: Router,
     public http: HttpClient,
-  ) { 
+  ) { }
+
+  ngOnInit() : void {
+
     this.form = this.formBuilder.group({
       fName: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('[a-zA-Z ]{2,64}$'),
+        Validators.pattern('[a-zA-Z ]{2,20}$'),
       ])),
       mName: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('[a-zA-Z ]{2,64}$'),
+        Validators.pattern('[a-zA-Z ]{2,20}$'),
       ])),
       lName: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('[a-zA-Z ]{2,64}$'),
+        Validators.pattern('[a-zA-Z ]{2,20}$'),
       ])),
       adrs: ['', Validators.required],
       pin: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(6)
+        Validators.pattern('[ 0-9 ]{6}$'),
       ])),
-      city: ['', Validators.required],
+      city: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('[a-zA-Z ]{2,64}$'),
+      ])),
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      contact: ['', Validators.required],
-      password: new FormControl('', Validators.compose([
+      contact: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10)
+        Validators.pattern('[ 0-9 ]{10}$'),
       ])),
+      password: ['', Validators.required],
     });
-  }
-
-  ngOnInit() {
-
   }
 
   async showToast(message: string){
@@ -183,8 +82,12 @@ export class RegisterPage implements OnInit {
       contact_no:this.form.value.contact,
       password:this.form.value.password
     }
-    //this.submitted=true
-    if(this.form.valid) 
+    this.submitted=true
+    if(this.form.invalid) 
+    {
+      this.showToast("Please Enter Valid Data.");
+    } 
+    else 
     {
       this.http.post("http://localhost/Smart-PGApi/registration.php",data).subscribe(res=>{
         console.log(res.status);     
@@ -196,10 +99,6 @@ export class RegisterPage implements OnInit {
           this.showToast("Something went wrong"); 
         }
       })
-    } 
-    else 
-    {
-      this.showToast("Please Enter Valid Data.");
     } 
   }
 }

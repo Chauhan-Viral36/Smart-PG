@@ -63,7 +63,7 @@ export class ForgotpasswordPage implements OnInit {
     } 
     else 
     {
-      this.showToast("Please Valid Email or Password");
+      this.showToast("Please Enter Valid Email or Password");
     }
 
   }

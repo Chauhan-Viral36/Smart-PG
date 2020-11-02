@@ -12,44 +12,50 @@ import { ToastController } from '@ionic/angular';
 export class MyprofilePage implements OnInit {
 
   form:FormGroup;
+  submitted = false;
 
   constructor(
     public toastController: ToastController,
     private formBuilder: FormBuilder,
     public router: Router,
     public http: HttpClient,
-  ) {
+  ) { }
+
+  ngOnInit() : void {
+
     this.form = this.formBuilder.group({
       fName: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('[a-zA-Z ]{2,64}$'),
+        Validators.pattern('[a-zA-Z ]{2,20}$'),
       ])),
       mName: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('[a-zA-Z ]{2,64}$'),
+        Validators.pattern('[a-zA-Z ]{2,20}$'),
       ])),
       lName: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('[a-zA-Z ]{2,64}$'),
+        Validators.pattern('[a-zA-Z ]{2,20}$'),
       ])),
       adrs: ['', Validators.required],
       pin: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(6)
+        Validators.pattern('[ 0-9 ]{6}$'),
       ])),
-      city: ['', Validators.required],
+      city: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('[a-zA-Z ]{2,64}$'),
+      ])),
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      contact: ['', Validators.required],
+      contact: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('[ 0-9 ]{10}$'),
+      ])),
     });
-   }
-
-  ngOnInit() {
   }
 
   async showToast(message: string){
@@ -75,8 +81,12 @@ export class MyprofilePage implements OnInit {
       contact_no:this.form.value.contact,
       user_id:localStorage.getItem('id'),
     }
-    //this.submitted=true
-    if(this.form.valid) 
+    this.submitted=true
+    if(this.form.invalid) 
+    {
+      this.showToast("Please Enter Valid Data."); 
+    } 
+    else 
     {
       this.http.post("http://localhost/Smart-PGApi/update_profile.php",data).subscribe(res=>{
         console.log(res.status);
@@ -88,10 +98,6 @@ export class MyprofilePage implements OnInit {
           this.showToast("Something went wrong"); 
         }
       })
-    } 
-    else 
-    {
-      this.showToast("Please Enter Valid Data.");
     } 
   }
 }

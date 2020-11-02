@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
    </ion-buttons>
-    <ion-title>pgdetails</ion-title>
+    <ion-title>PG Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,28 +18,31 @@
         <ion-card-title>Name : {{data.pg_name}}</ion-card-title>
       </ion-card-content>
       <ion-card-content>
-        Price={{data.pg_price}}
+        Price : {{data.pg_price}}
       </ion-card-content>
       <ion-card-content>
-        Deposite={{data.deposite}}
+        Deposite : {{data.deposite}}
       </ion-card-content>
       <ion-card-content>
-        Amenities={{data.pg_amenities}}
+        Amenities : {{data.pg_amenities}}
       </ion-card-content>
       <ion-card-content>
-        Address={{data.pg_address}}
+        Address : {{data.pg_address}}
       </ion-card-content>
       <ion-card-content>
-        Area={{data.pg_area}}
+        Area : {{data.pg_area}}
       </ion-card-content>
       <ion-card-content>
-        Description={{data.pg_description}}
+        Description : {{data.pg_description}}
       </ion-card-content>
       <ion-card-content>
-        Status={{data.status}}
+        Status : {{data.status}}
       </ion-card-content>
       <ion-card-content>
-        OwnerName={{data.f_name + ' ' + data.l_name}}
+        Owner Contact : {{data.contact_no}}
+      </ion-card-content>
+      <ion-card-content>
+        OwnerName : {{data.f_name + ' ' + data.l_name}}
       </ion-card-content>
     </ion-card> 
   </ion-item>

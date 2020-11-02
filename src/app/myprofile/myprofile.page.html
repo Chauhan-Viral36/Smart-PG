@@ -11,8 +11,13 @@
   <form [formGroup]="form" (ngSubmit)="updateData()">
     <ion-item style="margin-top: 10px;">
         <ion-label position="floating">First Name</ion-label>
-        <ion-input type="text" formControlName="fName"></ion-input>
+        <ion-input type="text" formControlName="fName" [ngClass]="{ 'is-invalid': (submitted && form.controls.fName.errors) || (!form.controls.fName.pristine && form.controls.fName.invalid) }"></ion-input>
     </ion-item>
+
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.fName.errors) || (!form.controls.fName.pristine && form.controls.fName.invalid)">
+      <div *ngIf="form.controls.fName.errors.required">First Name is required</div>
+      <div *ngIf="form.controls.fName.errors.pattern">Only Alphabets with space between 2 to 20 characters</div>
+    </ion-text>
 
     <!-- <ion-text color="danger">
       <p [hidden]="form.valid || submitted == false" class="ion-padding-start">
@@ -22,31 +27,54 @@
 
     <ion-item style="margin-top: 10px;">
       <ion-label position="floating">Middle Name</ion-label>
-      <ion-input type="text" formControlName="mName"></ion-input>
+      <ion-input type="text" formControlName="mName" [ngClass]="{ 'is-invalid': (submitted && form.controls.mName.errors) || (!form.controls.mName.pristine && form.controls.mName.invalid) }"></ion-input>
     </ion-item>
+
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.mName.errors) || (!form.controls.mName.pristine && form.controls.mName.invalid)">
+      <div *ngIf="form.controls.mName.errors.required">Middle Name is required</div>
+      <div *ngIf="form.controls.mName.errors.pattern">Only Alphabets with space between 2 to 20 characters</div>
+    </ion-text>
   
     <ion-item style="margin-top: 10px;">
       <ion-label position="floating">Last Name</ion-label>
-      <ion-input type="text" formControlName="lName"></ion-input>
+      <ion-input type="text" formControlName="lName" [ngClass]="{ 'is-invalid': (submitted && form.controls.lName.errors) || (!form.controls.lName.pristine && form.controls.lName.invalid) }"></ion-input>
     </ion-item>
+
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.lName.errors) || (!form.controls.lName.pristine && form.controls.lName.invalid)">
+      <div *ngIf="form.controls.lName.errors.required">Last Name is required</div>
+      <div *ngIf="form.controls.lName.errors.pattern">Only Alphabets with space between 2 to 20 characters</div>
+    </ion-text>
 
     <ion-item style="margin-top: 10px;">
       <ion-label position="floating">Address</ion-label>
-      <ion-input type="text" formControlName="adrs"></ion-input>
+      <ion-input type="text" formControlName="adrs" [ngClass]="{ 'is-invalid': (submitted && form.controls.adrs.errors) || (!form.controls.adrs.pristine && form.controls.adrs.invalid) }"></ion-input>
     </ion-item>
+
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.adrs.errors) || (!form.controls.adrs.pristine && form.controls.adrs.invalid)">
+      <div *ngIf="form.controls.adrs.errors.required">Address is required</div>
+    </ion-text>
 
     <ion-item style="margin-top: 10px;">
       <ion-label position="floating">Pincode</ion-label>
-      <ion-input type="number"  formControlName="pin"></ion-input>
+      <ion-input type="number"  formControlName="pin" [ngClass]="{ 'is-invalid': (submitted && form.controls.pin.errors) || (!form.controls.pin.pristine && form.controls.pin.invalid) }"></ion-input>
     </ion-item>
+
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.pin.errors) || (!form.controls.pin.pristine && form.controls.pin.invalid)">
+      <div *ngIf="form.controls.pin.errors.required">Pincode is required</div>
+      <div *ngIf="form.controls.pin.errors.pattern">Only 6 Digits Are Valid</div>
+    </ion-text>
 
     <ion-item style="margin-top: 10px;">
       <ion-label position="floating">City</ion-label>
-      <ion-input type="text" formControlName="city"></ion-input>
+      <ion-input type="text" formControlName="city" [ngClass]="{ 'is-invalid': (submitted && form.controls.city.errors) || (!form.controls.city.pristine && form.controls.city.invalid) }"></ion-input>
     </ion-item>
 
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.city.errors) || (!form.controls.city.pristine && form.controls.city.invalid)">
+      <div *ngIf="form.controls.city.errors.required">City is required</div>
+    </ion-text>
+
     <ion-list style="margin-top: 10px;">
-      <ion-radio-group formControlName="gender">
+      <ion-radio-group formControlName="gender" [ngClass]="{ 'is-invalid': (submitted && form.controls.gender.errors) || (!form.controls.gender.pristine && form.controls.gender.invalid) }">
         <ion-list-header>
           <ion-label>
             Gender
@@ -63,20 +91,38 @@
       </ion-radio-group>
     </ion-list>
 
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.gender.errors) || (!form.controls.gender.pristine && form.controls.gender.invalid)">
+      <div *ngIf="form.controls.gender.errors.required">Please Select Gender</div>
+    </ion-text>
+
     <ion-item style="margin-top: 10px;">
       <ion-label position="floating">Date-Of-Birth</ion-label>
-      <ion-datetime displayFormat="YYYY/MM/DD" formControlName="dob"></ion-datetime>
+      <ion-datetime displayFormat="YYYY/MM/DD" formControlName="dob" [ngClass]="{ 'is-invalid': (submitted && form.controls.dob.errors) || (!form.controls.dob.pristine && form.controls.dob.invalid) }"></ion-datetime>
     </ion-item>
-  
+
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.dob.errors) || (!form.controls.dob.pristine && form.controls.dob.invalid)">
+      <div *ngIf="form.controls.dob.errors.required">Please Select Date Of Birth</div>
+    </ion-text>
+
     <ion-item style="margin-top: 10px;">
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="email"  formControlName="email"></ion-input>
+      <ion-input type="email"  formControlName="email" [ngClass]="{ 'is-invalid': (submitted && form.controls.email.errors) || (!form.controls.email.pristine && form.controls.email.invalid) }"></ion-input>
     </ion-item>
+
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.email.errors) || (!form.controls.email.pristine && form.controls.email.invalid)">
+      <div *ngIf="form.controls.email.errors.required">Email Is required</div>
+      <div *ngIf="form.controls.email.errors.pattern">Enter Valid Email</div>
+    </ion-text>
 
     <ion-item style="margin-top: 10px;">
       <ion-label position="floating">Contact</ion-label>
-      <ion-input type="number"  formControlName="contact"></ion-input>
+      <ion-input type="number"  formControlName="contact" [ngClass]="{ 'is-invalid': (submitted && form.controls.contact.errors) || (!form.controls.contact.pristine && form.controls.contact.invalid) }"></ion-input>
     </ion-item>
+
+    <ion-text class="invalid-feedback" color="danger" *ngIf="(submitted && form.controls.contact.errors) || (!form.controls.contact.pristine && form.controls.contact.invalid)">
+      <div *ngIf="form.controls.contact.errors.required">Contact is required</div>
+      <div *ngIf="form.controls.contact.errors.pattern">Only 10 Digits Are Valid</div>
+    </ion-text>
 
     <ion-button type="submit" shape="round" style="margin-top: 20px;" expand="full">Update</ion-button>
   </form>

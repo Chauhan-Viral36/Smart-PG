@@ -14,6 +14,7 @@ export class AddpgPage implements OnInit {
 
   form: FormGroup;
   imageElement:any;
+  submitted = false;
 
   constructor(
     public toastController: ToastController,
@@ -73,8 +74,12 @@ export class AddpgPage implements OnInit {
       user_id : localStorage.getItem('id'),
       images : this.imageElement
     }
-    console.log(details)
-    if(this.form.valid) 
+    this.submitted=true
+    if(this.form.invalid) 
+    {
+      this.showToast("Please Enter Valid Data");
+    } 
+    else 
     {
       this.http.post("http://localhost/Smart-PGApi/add_pg.php",details).subscribe(res=>{
         console.log(res)
@@ -87,10 +92,6 @@ export class AddpgPage implements OnInit {
           this.showToast("Something went wrong"); 
         }
       })
-    } 
-    else 
-    {
-      this.showToast("Please Enter Valid Data.");
     } 
   }
 }
